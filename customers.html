@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Accounts | Basic Banking System</title>
+    <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="assets/css/customer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- navbar starts here  -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./index.html">Bank of Ghaziabad</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">Home </a>
+                </li>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="./customers.html"
+                        style="color: rgb(37, 36, 36)!important; background-color: rgb(180, 178, 178);">Send Money</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="bank.html">About Us<span class="sr-only">(current)</span></a>
+      </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- navbar ends here  -->
+
+    <div class="my-info text-center">
+        <h2>Name: Vikas Sharma</h2>
+        <h4>Net Bank Balance: ₹<span id="myAccountBalance">50000</span></h4>
+
+        <button class="btn btn-info" data-toggle="modal" data-target="#sendMoney">Send Money</button>
+        <a class="btn btn-info" href="" data-toggle="modal" data-target="#transactionHistory">See All Transactions </a>
+    </div>
+
+    <!-- Modal send money -->
+    <div class="modal fade" id="sendMoney" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Money</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="input-group mb-3">
+                            <input type="text" id="enterName" class="form-control" placeholder="Recipient's username"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">@email.com</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="enterName" class="form-control" placeholder="Sender's username"
+                                aria-label="Sender's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">Name of the Person</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">₹</span>
+                            </div>
+                            <input type="text" id="enterAmount" class="form-control" placeholder=" Enter Amount"
+                                aria-label="Amount (to the nearest dollar)">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="enterAccount Number" class="form-control" placeholder="Account Number"
+                                aria-label="Account Number" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">To Sender</span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="sendMoney()" class="btn btn-success" data-dismiss="modal">Send
+                        Money</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal transaction History-->
+    <div class="modal fade" id="transactionHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Transaction History <br> You are already on this page Thank You!</br></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ol id="transaction-history-body">
+
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- table  -->
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="table-danger">
+                        <th scope="col">Sl. No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Citizenship No.</th>
+                        <th scope="col">Account No.</th>
+                        <th scope="col">Mobile No.</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Bank Balance(in ₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-light">
+                        <td scope="row">1</td>
+                        <td>Vedant Mohare</td>
+                        <td> ABXX bbbs sssx cccc ughd cccc YYCD</td>
+                        <td>46654259742 </td>
+                        <td>6628562423 </td>
+                        <td>vedantm@email.com</td>
+                        <td>
+                            <p id="vedantBankBalance">4500</p>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td scope="row">2</td>
+                        <td>Suresh Patole</td>
+                        <td> ZZKK bbbs sssx cccc ughd cccc HHJJ</td>
+                        <td>33492695048 </td>
+                        <td>2348562438 </td>
+                        <td>suresh@email.com</td>
+                        <td>
+                            <p id="sureshBankBalance">24000</p>
+                        </td>
+                    </tr>
+                    <tr class="table-light">
+                        <td scope="row">3</td>
+                        <td>Abhimanyu Das</td>
+                        <td> AALL bbbs sssx nnnn cccc cccc CCII</td>
+                        <td>56465248968 </td>
+                        <td>6663489563 </td>
+                        <td>abhimny@email.com</td>
+                        <td>
+                            <p id="abhimanyuBankBalance">3400</p>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td scope="row">4</td>
+                        <td>Ravindra Borkar</td>
+                        <td> TTUU bbbs sssx bxce cccc cccc LMNO</td>
+                        <td>52464958954 </td>
+                        <td>6392945896 </td>
+                        <td>Ravindra@email.com</td>
+                        <td>
+                            <p id="ravindraBankBalance">4000</p>
+                        </td>
+                    </tr>
+                    <tr class="table-light">
+                        <td scope="row">5</td>
+                        <td>Hariom Narayan</td>
+                        <td> PSTU bbbs sssx cccc xzcc cccc SDHR</td>
+                        <td>64895184512 </td>
+                        <td>6127378879 </td>
+                        <td>hariom@email.com</td>
+                        <td>
+                            <p id="hariomBankBalance">6300</p>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td scope="row">6</td>
+                        <td>S.R.Venkat</td>
+                        <td> NNEW bbbs sssx cccc wwww cccc CAQX</td>
+                        <td>56445660012 </td>
+                        <td>2536775478 </td>
+                        <td>venkatsr@email.com</td>
+                        <td>
+                            <p id="venkatBankBalance">1003</p>
+                        </td>
+                    </tr>
+                    <tr class="table-light">
+                        <td>7</td>
+                        <td>Sumer Ahmed</td>
+                        <td> MVGG bbbs sssx cccc vvvv cccc PPEE</td>
+                        <td>12349795642 </td>
+                        <td>5663262949 </td>
+                        <td>sumer@email.com</td>
+                        <td>
+                            <p id="sumerBankBalance">5600</p>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td scope="row">8</td>
+                        <td>Sameer Khan</td>
+                        <td> ALkk bbbs sssx cccc cccc cccc cccc</td>
+                        <td>61430895497 </td>
+                        <td>5646763957 </td>
+                        <td>sameer@email.com</td>
+                        <td>
+                            <p id="sameerBankBalance">35603</p>
+                        </td>
+                    </tr>
+                    <tr class="table-light">
+                        <td scope="row">9</td>
+                        <td>Munna Tripathi</td>
+                        <td> DDZW bbbs sssx eeee cccc dddd YOOF</td>
+                        <td>25646764862 </td>
+                        <td>5647984624 </td>
+                        <td>munnatrp@email.com</td>
+                        <td>
+                            <p id="munnaBankBalance">8500</p>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td scope="row">10</td>
+                        <td>Alex Gaitonde</td>
+                        <td> OOFF bbbs sssx ffff cccc cccc KLTE</td>
+                        <td>95646764852 </td>
+                        <td>8885735478 </td>
+                        <td>Alexg@email.com</td>
+                        <td>
+                            <p id="AlexBankBalance">1350</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"></script>
+</body>
+</html>
